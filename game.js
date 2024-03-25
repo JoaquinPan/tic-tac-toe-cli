@@ -1,6 +1,7 @@
 const P1 = "X";
 const P2 = "O";
 const EMPTY = " ";
+const PLAYERS = [P1, P2];
 
 function createEmptyBoard() {
   return [
@@ -105,6 +106,18 @@ function isBoardFull(state) {
   return true;
 }
 
+function getInitialPlayerIdx() {
+  return 0;
+}
+
+function getPlayerByIdx(playIdx) {
+  return PLAYERS[playIdx];
+}
+
+function getNextPlayerIdx(playIdx) {
+  return (playIdx + 1) % PLAYERS.length;
+}
+
 module.exports = {
   createEmptyBoard,
   updateGame,
@@ -112,4 +125,7 @@ module.exports = {
   EMPTY,
   P1,
   P2,
+  getInitialPlayerIdx,
+  getPlayerByIdx,
+  getNextPlayerIdx,
 };
