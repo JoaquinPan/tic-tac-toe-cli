@@ -5,6 +5,7 @@ const {
   EMPTY,
   P1,
   P2,
+  computeBestMove,
 } = require("./game");
 
 describe("createEmptyBoard", () => {
@@ -168,5 +169,89 @@ describe("checkWinner", () => {
         [EMPTY, P2, EMPTY],
       ])
     ).toBe(P2);
+  });
+});
+
+describe("computeBestMove", () => {
+  test("winning move1", () => {
+    const state = [
+      [P1, P1, EMPTY],
+      [P2, P2, EMPTY],
+      [EMPTY, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P1, state);
+    expect(move).toEqual([0, 2]);
+  });
+  test("winning move2", () => {
+    const state = [
+      [P1, P2, EMPTY],
+      [P1, P2, EMPTY],
+      [EMPTY, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P1, state);
+    expect(move).toEqual([2, 0]);
+  });
+  test("winning move3", () => {
+    const state = [
+      [P2, EMPTY, P1],
+      [EMPTY, P1, EMPTY],
+      [EMPTY, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P2, state);
+    expect(move).toEqual([2, 0]);
+  });
+  test("winning move4", () => {
+    const state = [
+      [P2, EMPTY, P1],
+      [EMPTY, P1, EMPTY],
+      [P2, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P1, state);
+    expect(move).toEqual([1, 0]);
+  });
+  test("winning move5", () => {
+    const state = [
+      [P2, EMPTY, P1],
+      [P1, P1, EMPTY],
+      [P2, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P2, state);
+    expect(move).toEqual([1, 2]);
+  });
+  test("winning move6", () => {
+    const state = [
+      [P2, EMPTY, P1],
+      [P1, P1, P2],
+      [P2, P1, EMPTY],
+    ];
+    const move = computeBestMove(P2, state);
+    expect(move).toEqual([0, 1]);
+  });
+  test("winning move7", () => {
+    const state = [
+      [P2, P2, P1],
+      [P1, P1, P2],
+      [P2, P1, EMPTY],
+    ];
+    const move = computeBestMove(P1, state);
+    expect(move).toEqual([2, 2]);
+  });
+  test("winning move8", () => {
+    const state = [
+      [P1, P1, P2],
+      [P1, P2, EMPTY],
+      [EMPTY, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P2, state);
+    expect(move).toEqual([2, 0]);
+  });
+  test("winning move9", () => {
+    const state = [
+      [P1, P1, P2],
+      [EMPTY, P2, EMPTY],
+      [EMPTY, EMPTY, EMPTY],
+    ];
+    const move = computeBestMove(P1, state);
+    expect(move).toEqual([2, 0]);
   });
 });
